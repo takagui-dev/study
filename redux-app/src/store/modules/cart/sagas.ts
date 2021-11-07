@@ -1,9 +1,13 @@
 import { all, takeLatest, select, call, put } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
-import { addProductToCartFailure, addProductToCartRequest, addProductToCartSuccess } from './actions';
+import {
+  addProductToCartFailure,
+  addProductToCartRequest,
+  addProductToCartSuccess
+} from './actions';
 import { IState } from '../../../store';
-import { IStockResponse } from './types';
+import { ActionTypes, IStockResponse } from './types';
 import api from '../../../services/api';
 
 type checkProductStockRequest = ReturnType<typeof addProductToCartRequest>;
@@ -29,5 +33,5 @@ function* checkProductStock({ payload }: checkProductStockRequest) {
 }
 
 export default all([
-  takeLatest('ADD_PRODUCT_TO_CART_REQUEST', checkProductStock)
+  takeLatest(ActionTypes.addProductToCartRequest, checkProductStock)
 ]);
